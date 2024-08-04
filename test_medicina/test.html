@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js" integrity="sha256-sw0iNNXmOJbQhYFuC9OF2kOlD5KQKe1y5lfBn4C9Sjg=" crossorigin="anonymous"></script>
+
+    <script src="yaml.min.js"></script>
+
+    <script src="resources_yml/Cardiologie_1.js"></script>
+    <script src="resources_yml/Cardiologie_2.js"></script>
+    <script src="resources_yml/Cardiologie_3.js"></script>
+    <script src="resources_yml/Cardiologie_4.js"></script>
+    <script src="resources_yml/chirurgie_p1_1.js"></script>
+    <script src="resources_yml/chirurgie_p1_2.js"></script>
+    <script src="resources_yml/chirurgie_p1_3.js"></script>
+    <script src="resources_yml/chirurgie_p2_1.js"></script>
+    <script src="resources_yml/chirurgie_p2_2.js"></script>
+    <script src="resources_yml/chirurgie_p2_3.js"></script>
+    <script src="resources_yml/ginecologie_1.js"></script>
+    <script src="resources_yml/ginecologie_2.js"></script>
+    <script src="resources_yml/ginecologie_3.js"></script>
+    <script src="resources_yml/ginecologie_4.js"></script>
+    <script src="resources_yml/ginecologie_5.js"></script>
+    <script src="resources_yml/Pediatrie_1.js"></script>
+    <script src="resources_yml/Pediatrie_2.js"></script>
+    <script src="resources_yml/Pediatrie_3.js"></script>
+    <script src="resources_yml/Pediatrie_4.js"></script>
+    <script src="resources_yml/Pediatrie_5.js"></script>
+    <script src="resources_yml/Pediatrie_6.js"></script>
+    <script src="resources_yml/reumatologie.js"></script>
+    <title>Test <nume></title>
+</head>
+<body>
+ 
+    <div class="nav-bara">
+    
+    </div>    
+
+</body>
+
+    <script>
+
+        var teste = [
+            cardiologie_1, cardiologie_2, cardiologie_3, cardiologie_4,
+            chirurgie_1, chirurgie_2, chirurgie_3, chirurgie_4, chirurgie_5, chirurgie_6,
+            ginecologie_1, ginecologie_2, ginecologie_3, ginecologie_4, ginecologie_5,
+            pediatrie_1, pediatrie_2, pediatrie_3, pediatrie_4, pediatrie_5, pediatrie_6,
+            reumatologie_1
+        ];
+
+
+        $( document ).ready(() => {
+
+            
+            async function displayYAML() {
+                try {
+
+                    // YAML string to Javascript object
+                    var obj = jsyaml.load(teste[0]);
+                    console.log(obj);
+                   
+                }
+                    catch (error) {
+                    console.error('Error fetching or parsing YAML:', error);
+                }
+            }
+
+            // TODO: convert all to JSON and finish the rest of the code to display the questions
+
+            displayYAML();
+
+/*
+            let all_data = $('#my-data').data();
+            let all_questions = all_data.questions;
+            console.log(all_questions);
+            let total = all_questions.length;
+            const chunkSize = 20;
+
+            for (let i = 0; i < total; i += chunkSize) {
+
+                const chunk = all_questions.slice(i, i + chunkSize);
+                let end = i + 20 < total ? i + 20 : total;
+                $("#questions").append(`<div class="card">
+                    <div class="card-header"><h4 id="${i}--toggle" class="card-title">Intrebari ${i}-${end} din ${total}</h4></div>
+                    <div id='${i}--div' class="card-body"></div>
+                </div>`);
+
+                let j = 0;
+                for (let question of chunk) {
+                    j++;
+                    let r_id = uuidv4();
+
+                    let question_html = makeQuestion(
+                        r_id,
+                        question["question"],
+                        question["answers"],
+                        question["correct"],
+                        question["Răspuns corect"]
+                    );
+
+                    $(`#${i}--div`).append(question_html);
+                    if (j < 20) $(`#${i}--div`).append('<hr />');
+
+                    // Add listener for button click to check the answer
+                    $(`#${r_id}--verify`).on('click', function() { 
+                        let btnName = $(this).attr('name');
+                        let id = btnName.split('--')[0];
+                        $(`[name='${id}']`).each(function (){
+                            if (this.checked && !($(this).data().answer)){
+                                $(this).parent().parent().css('backgroundColor', '#f6d5d4');
+                            }
+                            if ($(this).data().answer){
+                                $(this).parent().parent().css('backgroundColor', '#AFFF80');
+                            }
+                        });
+                    });
+                }
+
+                $(`#${i}--div`).append(`<div class="reset_div">
+                    <input type='button' class="btn btn-warning" value="Reset" name='${i}--reset' id='${i}--reset' />
+                </div>`);
+
+                // Add listener for button click to reset the answer
+                $(`#${i}--reset`).on('click', function() {
+                    $(`#${i}--div input`).each(function (){
+                        $(this).parent().parent().css('backgroundColor', '');
+                        $(this).prop("checked", false) 
+                    });
+                });
+
+                $(`#${i}--toggle`).on('click', function(){
+                    $(`#${i}--div`).slideToggle('slow');
+                });
+ 
+                // console.log(question["correct"]);
+            }
+            // console.log( "ready!" );
+
+
+            function makeQuestion(r_id, question, answer, correct, raspuns) {
+
+                let answer_list = [];
+                let title = `<div><p class="title">${question}</p></div>`;
+
+                if (correct == undefined || correct == null){
+                    correct = [];
+                }
+                if (answer == undefined || answer == null){
+                    answer = [];
+                }
+
+                if (correct.length == 1){
+                    for (let a of answer){
+                        answer_list.push(`<div>
+                            <label>
+                                <input type="radio" name="${r_id}" value="${a}" data-answer="false" />
+                            ${a}</label>
+                        </div>`);
+                    }
+                    answer_list.push(`<div>
+                        <label>
+                            <input type="radio" name="${r_id}" value="${correct[0]}" data-answer="true" />
+                        ${correct[0]}</label>
+                    </div>`);
+                } 
+                else {
+                    for (let a of answer){
+                        answer_list.push(`<div>
+                            <label>
+                                <input type='checkbox' name='${r_id}' value="${a}" data-answer='false' />
+                            ${a}</label>
+                        </div>`);
+                    }
+                    for (let c of correct){
+                        answer_list.push(`<div>
+                            <label>
+                                <input type='checkbox' name='${r_id}' value="${c}" data-answer='true' />
+                            ${c}</label>
+                        </div>`);
+                    }
+                }
+
+                let new_list = shuffle(answer_list);
+
+                new_list.push(`<div class="btn_div">
+                    <input type='button' class="btn btn-primary" value="Verifica" name='${r_id}--verify' id='${r_id}--verify' />
+                </div>`);
+
+                let question_html = `<div id='${r_id}--div'>
+                    ${title}
+                    ${new_list.join('')}
+                </div>`;
+
+                return question_html;
+            }
+
+
+            function uuidv4() {
+                return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+                    (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+                );
+            }
+
+
+            function shuffle(array) {
+                let currentIndex = array.length,  randomIndex;
+                // While there remain elements to shuffle.
+                while (currentIndex != 0) {
+                    // Pick a remaining element.
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    // And swap it with the current element.
+                    [array[currentIndex], array[randomIndex]] = [array[randomIndex],array[currentIndex]];
+                }
+                return array;
+            }
+
+            */
+        });
+    </script>
+</html>

@@ -1,0 +1,68 @@
+.title {
+    margin-bottom: 5px;
+    font-size: 12pt;
+    font-weight: 500;
+}
+
+label {
+    margin: 0;
+}
+
+#questions {
+    position: relative;
+}
+
+
+.btn_div {
+    margin: 5px;
+    padding-left: 20px;
+}
+.reset_div {
+    text-align: right;
+}
+
+.reset_div .btn{
+    width: 10em;
+}
+
+.btn{
+    width: 5em;
+}
+
+.thick{
+    border: none;
+    height: 2px;
+    color: #333;
+    background-color: #333;
+}
+
+.card-body {
+    display: none;
+}
+
+.card{
+    margin-bottom: 3px;
+}
+
+.card-header {
+    padding: 5px;
+    background: #CAF1DE;
+    cursor: pointer;
+}
+.card-title {
+    margin-bottom: 0;
+}
+
+.nav-bara {
+    width: 80vw;
+    margin: auto;
+    margin-bottom: 0.75em;
+}
+
+@media only screen and (max-width: 600px) {
+    .nav-bara {
+        width: 100%;
+        margin: auto;
+        margin-bottom: 0.75em;
+    }
+}
