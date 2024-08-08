@@ -1,4 +1,4 @@
-const chirurgie_3 = `
+const chirurgie_p1_3 = `
 ---
 
 # Boala varicoasă

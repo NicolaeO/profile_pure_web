@@ -1,4 +1,4 @@
-const chirurgie_4 = `
+const chirurgie_p2_1 = `
 ---
 
 # CHIRURGIE   ENDOCRINĂ

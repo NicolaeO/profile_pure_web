@@ -2,7 +2,7 @@ const headerHTML = `
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand p-0" href="/">
-            <img src="img/icon.svg" alt="Main">
+            <img style="width: 2em" src="https://raw.githubusercontent.com/NicolaeO/profile_pure_web/master/img/icon.svg" alt="Main">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

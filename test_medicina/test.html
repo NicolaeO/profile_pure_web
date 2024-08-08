@@ -37,49 +37,71 @@
     <script src="resources_yml/reumatologie.js"></script>
     <title>Test <nume></title>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
  
-    <div class="nav-bara">
-    
-    </div>    
+    <div id="header"></div>
 
+    <main class="flex-shrink-0">
+        <div class="container">
+            <div id="questions">
+
+            </div>
+        </div>
+    </main>
+
+
+
+
+    <div id="main-footer"></div>
 </body>
+
+<script src="../header.js"></script>
+<script src="../content.js"></script>
+<script src="../footer.js"></script>
+
 
     <script>
 
-        var teste = [
-            cardiologie_1, cardiologie_2, cardiologie_3, cardiologie_4,
-            chirurgie_1, chirurgie_2, chirurgie_3, chirurgie_4, chirurgie_5, chirurgie_6,
-            ginecologie_1, ginecologie_2, ginecologie_3, ginecologie_4, ginecologie_5,
-            pediatrie_1, pediatrie_2, pediatrie_3, pediatrie_4, pediatrie_5, pediatrie_6,
-            reumatologie_1
-        ];
+        var teste = {
+            'Cardiologie_1': cardiologie_1,
+            'Cardiologie_2': cardiologie_2,
+            'Cardiologie_3': cardiologie_3,
+            'Cardiologie_4': cardiologie_4,
+            'Chirurgie_p1_1': chirurgie_p1_1,
+            'Chirurgie_p1_2': chirurgie_p1_2,
+            'Chirurgie_p1_3': chirurgie_p1_3,
+            'Chirurgie_p2_1': chirurgie_p2_1,
+            'Chirurgie_p2_2': chirurgie_p2_2,
+            'Chirurgie_p2_1': chirurgie_p2_1,
+            'Ginecologie_1': ginecologie_1,
+            'Ginecologie_2': ginecologie_2,
+            'Ginecologie_3': ginecologie_3,
+            'Ginecologie_4': ginecologie_4,
+            'Ginecologie_5': ginecologie_5,
+            'Pediatrie_1': pediatrie_1,
+            'Pediatrie_2': pediatrie_2,
+            'Pediatrie_3': pediatrie_3,
+            'Pediatrie_4': pediatrie_4,
+            'Pediatrie_5': pediatrie_5,
+            'Pediatrie_6': pediatrie_6,
+            'Reumatologie_1': reumatologie_1,
+        };
 
 
         $( document ).ready(() => {
 
-            
-            async function displayYAML() {
-                try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const test_name = urlParams.get('test_name');
+            console.log("User selected: ", test_name);
 
-                    // YAML string to Javascript object
-                    var obj = jsyaml.load(teste[0]);
-                    console.log(obj);
-                   
-                }
-                    catch (error) {
-                    console.error('Error fetching or parsing YAML:', error);
-                }
+            try {
+                var all_questions = jsyaml.load(teste[test_name]);
+                console.log(all_questions);      
+            }
+                catch (error) {
+                console.error('Error fetching or parsing YAML:', error);
             }
 
-            // TODO: convert all to JSON and finish the rest of the code to display the questions
-
-            displayYAML();
-
-/*
-            let all_data = $('#my-data').data();
-            let all_questions = all_data.questions;
-            console.log(all_questions);
             let total = all_questions.length;
             const chunkSize = 20;
 
@@ -222,7 +244,8 @@
                 return array;
             }
 
-            */
+
         });
     </script>
+
 </html>

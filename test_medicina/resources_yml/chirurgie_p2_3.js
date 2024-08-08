@@ -1,4 +1,4 @@
-const chirurgie_6 = `
+const chirurgie_p2_3 = `
 ---
 
 

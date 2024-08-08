@@ -1,4 +1,4 @@
-const chirurgie_2 = `
+const chirurgie_p1_2 = `
 ---
 
 # Pancreatita acută și cronică
